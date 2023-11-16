@@ -1,0 +1,26 @@
+{% extends "orders/base.html" %} {% block title %} Signup {% endblock %} {% block body %} {% load staticfiles %}
+<link rel='stylesheet' type="text/css" href="{% static 'orders/styles.css' %}" />
+
+<!-- some code from here:http://flask.pocoo.org/docs/0.12/patterns/flashing/-->
+<h4 id=login_title> Pinocchio's Pizza & Subs <h4>
+  <p class="form-title">Sign up</p>
+   <form method="post" class="login" >
+     {% csrf_token %}
+     {% for field in form %}
+       <p >
+         {{ field.label_tag }}<br>
+         {{ field }}
+         <b style="color:white;" >{{ field.errors }}</b>
+       </p>
+     {% endfor %}
+      <input autocompete="off" type="submit" value="login" class="btn btn-success btn-sm" />
+     <p class="text-center">
+       Already have an account?
+       <a href="{% url 'login' %}" id="login_id">
+         login
+       </a>
+     </p>
+   </form>
+
+
+{% endblock %}

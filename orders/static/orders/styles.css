@@ -1,0 +1,150 @@
+body {
+  background: url('http://ak8.picdn.net/shutterstock/videos/24875138/thumb/1.jpg') fixed;
+  background-size: cover;
+  padding: 0;
+  margin: 0;
+  font-family: Arial;
+}
+
+.wrap {
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 99;
+}
+
+p.form-title {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+  color: #FFFFFF;
+  margin-top: 5%;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+}
+
+form {
+  width: 250px;
+  margin: 0 auto;
+}
+
+form.login input[type="text"], form.login input[type="password"], form.login input[type="repassword"], form.login input[type="email"] {
+  width: 100%;
+  margin: 0;
+  padding: 5px 10px;
+  background: 0;
+  border: 0;
+  border-bottom: 1px solid #FFFFFF;
+  outline: 0;
+  font-style: italic;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  margin-bottom: 5px;
+  color: #FFFFFF;
+  outline: 0;
+}
+
+form.login input[type="submit"] {
+  width: 100%;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-top: 16px;
+  outline: 0;
+  cursor: pointer;
+  letter-spacing: 1px;
+}
+
+form.login input[type="submit"]:hover {
+  transition: background-color 0.5s ease;
+}
+
+form.login label, form.login a {
+  font-size: 12px;
+  font-weight: 400;
+  color: #FFFFFF;
+}
+
+form.login a {
+  transition: color 0.5s ease;
+}
+
+form.login a:hover {
+  color: #2ecc71;
+}
+
+.pr-wrap {
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  display: none;
+}
+
+header {
+  padding: 1em;
+  color: white;
+  background-color: black;
+  clear: left;
+}
+
+nav {
+  text-align: right
+}
+
+div placeholder {
+  width: 5%
+}
+
+.text-center {
+  color: white;
+  font-size: 16px;
+}
+
+a button {
+  color: black;
+  position: absolute;
+  top: 8px;
+  right: 16px;
+  font-size: 18px;
+}
+
+fieldset {
+  margin-top: 100px
+}
+
+/*some code for this title taken form here: https://envato.com/blog/css3-typography-code-snippets/ */
+
+#login_title {
+  margin-top: 25px;
+  text-align: center;
+  font-size: 4em;
+  z-index: 100;
+  text-shadow: .04em .04em 0 #9cb8b3;
+  font-weight: 900;
+  color: #efedce;
+  white-space: nowrap;
+  position: relative;
+  letter-spacing: .1em;
+  padding: .2em 0 .25em 0;
+}
+
+#Navbar {
+  background-color: black
+}
+
+#checkoutpic {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -50px;
+  margin-left: -100px
+}

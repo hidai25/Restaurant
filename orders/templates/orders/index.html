@@ -1,0 +1,277 @@
+{% extends "orders/base.html" %} {% block title %} Pinnochio's {% endblock %} {% block body %} {% load staticfiles %}
+<link rel='stylesheet' type="text/css" href="{% static 'orders/styles2.css' %}" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amatic+SC">
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <a class="navbar-logo" href="#"><span style="color:green">Pinocchio's</span> Pizza & <span style="color:red">Subs</span></a>
+
+  <ul class="nav navbar-nav ml-auto">
+    <img src="http://www.pinocchiospizza.net/images/pinocchio_72.gif" style="height:100px" class="Pinnochio" alt="Pinocchio">
+    <li class="nav-item">
+      <a class="nav-link" href="#menu">MENU</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#about">ABOUT</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#Contact_us">CONTACT US</a>
+    </li>
+  </ul>
+</nav>
+
+<div id="welcoming">
+  <h1>Hello, {{ user.first_name }}! You are currently logged in as: {{ user.username }}</h1>
+  <a href="{% url 'logout' %}">Logout</a>
+</div>
+<br>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6 bg-light">
+      <img src="http://www.pinocchiospizza.net/images/building3.jpg" style="margin-left:60px;" class="front-image" alt="Restaurant">
+    </div>
+    <div class="col-md-6 bg-light">
+      <br>
+      <p id="about">
+        Noch's has reached a landmark this year......50 years in business! We've been feeding Harvard and the surrounding area since 1966! We sell award-winning sicilian-style pizza and mouth-watering steak subs! We have over 500 reviews on Yelp--- check it out!
+        Pinocchio's was recently named 1st Runner-up in the 'Boston's Best Pizza Poll' conducted by Eater.com and Top College Pizza Shop by Thrillist.com.
+      </p>
+    </div>
+  </div>
+</div>
+</div>
+
+<header class="" id="home">
+  <div>
+    <p></p>
+  </div>
+</header>
+
+<div id="menu">
+  <h1 id="menu_title">THE MENU</h1>
+  <div id="wrapper">
+    <a href="javascript:void(0)" style="text-decoration:none" onclick="openMenu(event, 'Regular_Pizza');" id="myLink">
+      <div class="tablink">Regular Pizza&ensp;</div>
+    </a>
+    <a href="javascript:void(0)" style="text-decoration:none" onclick="openMenu(event, 'Sicilian Pizza');">
+      <div class="tablink ">sicilian Pizza&ensp;</div>
+    </a>
+
+    <a href="javascript:void(0)" style="text-decoration:none" onclick="openMenu(event, 'Subs');">
+      <div class="tablink">Subs&ensp;</div>
+    </a>
+    <a href="javascript:void(0)" style="text-decoration:none" onclick="openMenu(event, 'Pasta');">
+      <div class="tablink">Pasta&ensp;</div>
+    </a>
+    <a href="javascript:void(0)" style="text-decoration:none" onclick="openMenu(event, 'Salads');">
+      <div class="tablink">Salads&ensp;</div>
+    </a>
+    <a href="javascript:void(0)" style="text-decoration:none" onclick="openMenu(event, 'Dinner_Platters');">
+      <div class="tablink">Dinner Platters</div>
+    </a>
+  </div>
+
+  <hr>
+
+  <form action="{% url 'cart:add_pizza_topping_to_cart_view'%}" method="POST">
+    {% csrf_token %}
+
+    <div id="Regular_Pizza" class="menu">
+
+      <div class="column">
+        <h1> Regular Pizza type </h1> {% for Regular_Pizza in Small_Regular_Pizza %}
+
+        <h1 style="line-height:1.5em"><b></b><span> </span><b>{{ Regular_Pizza.name }} </h1> {% endfor %}
+        <hr>
+      </div>
+
+      <div class="column">
+        <h1> Small </h1> {% for Regular_Pizza in Small_Regular_Pizza %}
+        <label class="container">
+<input type="radio" checked="checked" name="radio_select" value="{{ Regular_Pizza.id }}">
+  <span class="checkmark"> {{ Regular_Pizza.price }} </span>
+</label> {% endfor %}
+      </div>
+
+      <div class="column">
+        <h1> Large </h1> {% for Regular_Pizza in Large_Regular_Pizza %}
+        <label class="container">
+<input type="radio" checked="checked" name="radio_select" value="{{ Regular_Pizza.id }}">
+  <span class="checkmark"> {{ Regular_Pizza.price }} </span>
+</label> {% endfor %}
+      </div>
+
+      <br> {% for Toppings in Pizza_Toppings %}
+      <label id="toppings">
+  <input type="checkbox" name="checkbox"value="{{ Toppings.name}}" >
+  <span class="checkmark"> {{ Toppings.name }}</span>
+</label> {% endfor %}
+      <h1 style="color:black;"><button type="submit" value="add_pizza_topping_to_cart_view"name="Submit Order" style="margin-top:30px">Add to cart</button></h1>
+<p id="special"> *A Special Pizza is a Pizza with five toppings of your choice. Please select the correct amount of toppings.</p>
+  </form>
+  </div>
+
+
+  <form action="{% url 'cart:add_pizza_topping_to_cart_view'%}" method="POST">
+    {% csrf_token %}
+    <div id="Sicilian Pizza" class="menu">
+      <div class="column">
+        <h1> Sicilian Pizza type </h1> {% for Sicilian_Pizza in Small_Sicilian_Pizza %}
+        <h1 style="line-height:1.5em"><b></b><span> </span><b>{{ Sicilian_Pizza.name }} </h1> {% endfor %}
+        <hr>
+      </div>
+
+      <div class="column">
+        <h1> Small </h1> {% for Sicilian_Pizza in Small_Sicilian_Pizza %}
+        <label class="container">
+<input type="radio" checked="checked" name="radio_select" value="{{ Sicilian_Pizza.id }}">
+  <span class="checkmark"> {{ Sicilian_Pizza.price }} </span>
+</label> {% endfor %}
+      </div>
+
+      <div class="column">
+        <h1> Large </h1> {% for Sicilian_Pizza in Large_Sicilian_Pizza %}
+        <label class="container">
+<input type="radio" checked="checked" name="radio_select" value="{{ Sicilian_Pizza.id }}">
+  <span class="checkmark"> {{ Sicilian_Pizza.price }} </span>
+</label> {% endfor %}
+
+      </div>
+      <br> {% for Toppings in Pizza_Toppings %}
+      <label id="toppings">
+
+  <input type="checkbox" name="checkbox"value="{{ Toppings.name}}" >
+  <span class="checkmark"> {{ Toppings.name }}</span>
+</label> {% endfor %}
+      <h1 style="color:black;"><button type="submit" value="add_pizza_topping_to_cart_view"name="Submit Order" style="margin-top:30px">Add to cart</button></h1>
+      <p id="special"> *A Special Pizza is a Pizza with five toppings of your choice. Please select the correct amount of toppings.</p>
+  </form>
+  </div>
+
+
+  <div id="Subs" class="menu">
+    <div class="column">
+      <h1> Sub Type </h1> {% for Subs in Large_Subs %} {% csrf_token %}
+      <h1 style="line-height:1.58em;"><b></b><span> </span><b>{{ Subs.name }} </h1> {% endfor %}
+      <hr>
+    </div>
+
+    <div class="column">
+      <h1> Small </h1> {% for Subs in Small_Subs %}
+      <form action="{% url 'cart:add_to_cart' Subs.id %}" method="POST">
+        {% csrf_token %}
+        <h1> {{ Subs.price }}  <button type="submit" value="add_to_cart" style="color:black;margin-top:4.5px">Add to cart</button> </h1>
+      </form>
+      {% endfor %}
+      <hr>
+    </div>
+
+    <div class="column">
+      <h1> Large </h1> {% for Subs in Large_Subs %}
+      <form action="{% url 'cart:add_to_cart' Subs.id %}" method="POST">
+        {% csrf_token %}
+        <h1> {{ Subs.price }} <button type="submit" value="add_to_cart"style="color:black;margin-top:4.5px">Add to cart</button> </h1>
+      </form>
+      {% endfor %}
+      <hr>
+    </div>
+
+  </div>
+
+  <div id="Pasta" class="menu">
+    {% for Pasta in Pasta %}
+    <form action="{% url 'cart:add_to_cart' Pasta.id %}" method="POST">
+      {% csrf_token %}
+      <h1><b>{{ Pasta.name }}</b> {{ Pasta.price }} <button type="submit" value="add_to_cart" style="color:black;">Add to cart</button></h1>
+    </form>
+    {% endfor %}
+    <hr>
+  </div>
+
+  <div id="Salads" class="menu">
+    {% for Salad in Salad %}
+    <form action="{% url 'cart:add_to_cart' Salad.id %}" method="POST">
+      {% csrf_token %}
+      <h1><b>{{ Salad.name }}</b> {{ Salad.price }} <button type="submit" value="add_to_cart" style="color:black;">Add to cart </button> </h1>
+    </form>
+    {% endfor %}
+    <hr>
+  </div>
+
+  <div id="Dinner_Platters" class="menu">
+    <div class="column">
+      <h1> Name </h1> {% for Dinner_Platter in Small_Dinner_Platter %}
+      <form action="{% url 'cart:add_to_cart' Dinner_Platter.id %}" method="POST">
+        {% csrf_token %}
+      </form>
+      <h1 style="line-height:1.4em"><b></b><span> </span><b>{{ Dinner_Platter.name }} </h1> {% endfor %}
+      <hr>
+    </div>
+
+
+    <div class="column">
+      <h1> Small </h1> {% for Dinner_Platter in Small_Dinner_Platter %}
+      <form action="{% url 'cart:add_to_cart' Dinner_Platter.id %}" method="POST">
+        {% csrf_token %}
+        <h1><b></b><span> </span><b></b> {{ Dinner_Platter.price }}  <button type="submit" value="add_to_cart" style="color:black;">Add to cart</button> </h1>
+      </form>
+      {% endfor %}
+      <hr>
+    </div>
+
+    <div class="column">
+      <h1> Large </h1> {% for Dinner_Platter in Large_Dinner_Platter %}
+      <form action="{% url 'cart:add_to_cart' Dinner_Platter.id %}" method="POST">
+        {% csrf_token %}
+        <h1> {{ Dinner_Platter.price }} <button type="submit" value="add_to_cart" style="color:black;">Add to cart</button> </h1>
+      </form>
+      {% endfor %}
+      <hr>
+    </div>
+  </div>
+
+  <table class="pizza_table">
+    <thead>
+    </thead>
+  </table>
+</div>
+
+
+<div id="opening_hours">
+  <h1><b>Opening Hours</b></h1>
+  <p>Sunday 1 pm - 12 midnight</p>
+  <p>Monday - Thursday 11 am - 1 am</p>
+  <p>Friday - Saturday 11 am - 2:30 am*</p>
+  <p>*Please note that when the undergraduate students are not in session we close on Friday and Saturday night at 1:00 am instead of 2:30 am.</p>.
+</div>
+
+
+<div id="Contact_us">
+  <h1 class="" style="margin-bottom:">Contact</h1>
+  <p>Our phone numbers are 617-876-4897 or 617-876-0012 </p>
+  <p> Our fax number is 617-661-6188</p>
+  <p><span>FYI!</span> Find us on Twitter @PinocchiosPizz And Instagram @pinocchiospizza1</p>
+  <p><strong>Our mailing address is:</strong> Pinocchio's Pizza 74 Winthrop Street Cambridge, MA 02138 If you have any questions or comments or would like to get on our email list you can email us at pinocchiospizza1@gmail.com</p>.
+
+</div>
+</div>
+
+  <script>
+    // Tabbed Menu-Parly Taken from w3shcools webiste
+    function openMenu(evt, menuName) {
+      var i, x, tablinks;
+      x = document.getElementsByClassName("menu");
+      for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";
+      }
+      tablinks = document.getElementsByClassName("tablink");
+      for (i = 0; i < x.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace("", "");
+      }
+      document.getElementById(menuName).style.display = "block";
+      evt.currentTarget.firstElementChild.className += "";
+    }
+    document.getElementById("myLink").click();
+  </script>
+
+  {% endblock %}

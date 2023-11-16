@@ -1,0 +1,70 @@
+ {% load mathfilters %} {% block title %} Your Pinocchio's shopping cart {% endblock %} {% block body %} {% load staticfiles %}
+<link rel='stylesheet' type="text/css" href="{% static 'orders/styles2.css' %}" />
+<style>
+  body {
+    background-image: url("https://media.istockphoto.com/photos/dark-black-wood-texture-background-picture-id513694280?k=6&m=513694280&s=612x612&w=0&h=_qggBfNBXL_DPL5W2AE4EO4RQAQgICof250xX5Y8JJg=")
+  }
+</style>
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+
+<h4 id="title_cart"> Your Pinocchio's Shopping Cart  </h4>
+ <a href="{% url 'index' %}" style="margin-left:7px">Back to Menu</a>
+  <table class="table table-striped" style="color:white">
+    <thead>
+      <tr>
+        <th>Food Category</th>
+        <th>Nutrient</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th >Total</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+       {% for key,value in cart.items %}
+      <tr>
+</form>
+        <td> {{ value.category }}</td>
+        <td>{{ value.name }} {{ value.toppings }}</td>
+        <td>{{ value.price }}</td>
+        <td>{{ value.quantity }} {{ value.total_price }}</td>
+        <td> {{ value.price|mul:value.quantity|floatformat:2 }} </td>
+        <td>
+          <form action="{% url 'cart:add_to_cart' key %}" method="post">
+          {% csrf_token %}
+          <button type="submit" value="add_to_cart" style="color:black">add</button>
+        </form>
+</td>
+<td>
+  <form action="{% url 'cart:remove_from_cart' key %}" method="post">
+  {% csrf_token %}
+  <button type="submit" value="remove_from_cart" style="color:black">remove</button>
+  </form>
+</td>
+ {% endfor %}
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>
+          <p>Total: {{ total_cost|floatformat:2 }}</p>
+        </td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+</table>
+      <div style="margin-left:7px"><a href="{% url 'cart:checkout' %}">Proceed to Checkout!</a></div>
+      <p id="note"> If you are sure of your order please click on "Proceed to checkout". </p>
+      <p id="note"> *Any client who wishes to have extras for his Sub please click on the "back to menu" button to add it. </p>
+
+{% endblock %}
